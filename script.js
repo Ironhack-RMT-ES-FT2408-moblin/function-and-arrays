@@ -267,3 +267,88 @@ console.log(friends)
 friends.splice(2)
 console.log(friends)
 
+
+// REFERENCIAS
+// un valor id que se asigna a cada objeto o array o funcion creado en JS.
+
+let age1 = 30;
+let age2 = 30;
+
+console.log(age1 === age2)
+
+let agesArr1 = [20, 42, 53, 80] // ref. 1234
+let agesArr2 = [20, 42, 53, 80] // ref. 5678
+
+console.log(agesArr1 === agesArr2) // ref 1234 === ref 5678 => false
+// cuando comparamos tipos de data objetos, js los compara por su referencia
+
+console.log(agesArr1)
+
+console.log( agesArr1[0] === agesArr2[0] )
+
+let agesArr3 = agesArr1 // asignando la misma referencia a la nueva variable ref 1234
+console.log(agesArr1 === agesArr3) // true. ref 1234 === ref 1234
+
+// una forma de como clonar arrays
+// let agesArr3 = agesArr1.slice(0)
+
+// otras formas de clonar:
+// .map()
+// .filter()
+// JSON.parse y JSON.stringify
+// operador spread
+
+agesArr3.pop()
+agesArr3.pop()
+
+console.log("clone",agesArr3)
+console.log("orginal", agesArr1)
+
+// Actividad que uno todos los conceptos
+
+//* crear una funcion allNamesStartWith que reciba un array de nombres, tambien reciba una letra y nos vuelva la cantidad de nombres que empiezan por esa letra
+
+// example: ["ana", "juan", "david", "diego", "albert"], "d" => 2
+// example: ["ana", "juan", "david", "diego", "albert"], "j" => 1
+// example: ["ana", "juan", "david", "diego", "albert"], "x" => 0
+
+function allNamesStartWith( arrayDeNombres, letraInicial ) {
+  
+  if (arrayDeNombres === undefined || arrayDeNombres === null) {
+    return "ERRROR debes pasar los argumentos con sus valores"
+  }
+
+  if (arrayDeNombres.length === 0) {
+    return "ERRROR el array está vacio"
+  }
+
+  if (letraInicial.length > 1) {
+    return "ERRROR la letra a verificar debe tener solo un caracter"
+  }
+
+  // SIEMPRE TRABAJAR CON PARAMETROS
+  // console.log(arrayDeNombres)
+  // console.log(letraInicial)
+
+  let cantidad = 0;
+
+  for (let i = 0; i < arrayDeNombres.length; i++) {
+    let cadaNombre = arrayDeNombres[i]
+    if (cadaNombre[0] === letraInicial) {
+      // console.log(`${cadaNombre} empieza por la letra ${letraInicial}`)
+      cantidad++
+    }
+  }
+
+  // console.log(cantidad)
+  return cantidad
+}
+
+let names = ["ana", "juan", "david", "diego", "albert"]
+console.log( allNamesStartWith(names, "d") ) // 2
+console.log( allNamesStartWith(names, "j") ) // 1
+console.log( allNamesStartWith(names, "x") ) // 0
+console.log( allNamesStartWith(["núria", "loreta"], "l") ) // 1
+console.log( allNamesStartWith(undefined, "l") ) // "debes pasar los argumentos con sus valores"
+console.log( allNamesStartWith([], "l") ) // "el array está vacio"
+console.log( allNamesStartWith(["núria"], "la") ) // "el array está vacio"
